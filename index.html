@@ -319,12 +319,12 @@
 					qazwsxCount = parseInt(GetCookie("qazwsxCount"),10);
 				}
 				if (GetCookie("version") == "") {
-					version = "1.2.1";
+					version = "1.2.2";
 					SetCookie("version",version,720);
 				} else {
 					version = GetCookie("version");
-					if (version != "1.2.1") {
-						version = "1.2.1";
+					if (version != "1.2.2") {
+						version = "1.2.2";
 					}
 				}
 				if (GetCookieString("items") == "") {
@@ -372,7 +372,7 @@
 					}
 					if (crateTickNumber > 0) {
 						specialFound = 0;
-						for(crateTickNumber; crateTickNumber > 0; crateTickNumber--) {
+						for(crateTickNumber; crateTickNumber >= 1; crateTickNumber--) {
 							numberOfItems = RandInt(4,7);
 							for(var i = 0; i < numberOfItems; i++) {
 								rarityValue = RandInt(1,100001);
@@ -409,6 +409,7 @@
 							for(var j = 0; j < items[i].length; j++) {
 								if (items[i][j][2] > 0) {
 									newString += "<li style = \"color:" + rarityColours[i] + "\">" + items[i][j][0] + " x" + NumberToString(items[i][j][2]) + "</li>";
+									items[i][j][2] = 0;
 								}
 							}
 						}
@@ -416,13 +417,6 @@
 						SetCookie("numberofCrates",numberofCrates,720);
 						UpdateInventory();
 						UpdateCrates();
-						
-						// Wipe the new items cache
-						for(var i = 0; i < items.length; i++) {
-							for(var j = 0; j < items[i].length; j++) {
-								items[i][j][2] = 0;
-							}
-						}
 					}
 				} else {
 					NoConsent();
@@ -1004,7 +998,7 @@
 				if (numberofCrates >= 500000000) {
 					openCratesButtonHTML.innerHTML = "<b>Open 500 Million Crates</b>"
 				} else {
-					openCratesButtonHTML.innerHTML = "<b>Open Crates</b>"
+					openCratesButtonHTML.innerHTML = "<b>Open All Crates</b>"
 				}
 			}
 			
@@ -1039,7 +1033,7 @@
 				if (numberofCrates >= 500000000) {
 					openCratesButtonHTML.innerHTML = "<b>Open 500 Million Crates</b>"
 				} else {
-					openCratesButtonHTML.innerHTML = "<b>Open Crates</b>"
+					openCratesButtonHTML.innerHTML = "<b>Open All Crates</b>"
 				}
 			}
 			
